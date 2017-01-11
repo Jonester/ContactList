@@ -11,8 +11,10 @@
 @implementation InputCollector
 
 -(NSString *)inputForPrompt:(NSString *)promptString {
-    char input [255];
+    
     NSLog(@"%@", promptString);
+    
+    char input [255];
     fgets(input, 255, stdin);
     NSString *inputString = [[NSString stringWithCString:input encoding:NSUTF8StringEncoding]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     

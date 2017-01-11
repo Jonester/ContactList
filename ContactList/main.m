@@ -15,24 +15,31 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
         InputCollector *inputCollection = [InputCollector new];
+        
         ContactList *list = [ContactList new];
         BOOL programRun = YES;
         
-        while (YES) {
+        while (programRun) {
         
             NSString *menu = @"\nWhat would you like to do? \n\nnew - Create a new contact list\nlist - List all contacts\nquit - Quit";
+            NSString *menuChoice = [inputCollection inputForPrompt:menu];
             
-            if ([[inputCollection inputForPrompt:menu] isEqualToString:@"new"]) {
+            if ([menuChoice isEqualToString:@"new"]) {
                 Contact *contact = [Contact new];
                 contact.name = [inputCollection inputForPrompt:@"Enter your first and last name, separated by a space"];
                 contact.email = [inputCollection inputForPrompt:@"Enter your email address."];
                 [list.contactList addObject:contact];
-            } else if ([[inputCollection inputForPrompt:menu] isEqualToString:@"list"]) {
+            }
+            if ([menuChoice isEqualToString:@"list"]) {
+                int i = 1;
                 for (Contact *contact in list.contactList) {
-                [inputCollection inputForPrompt:[NSString stringWithFormat:@"Name: %@ Email: %@", contact.name, contact.email]];
+                    NSLog(@"%d) Name: %@ Email: %@", i, contact.name, contact.email);
+                    i++;
                 }
-            } else if ([[inputCollection inputForPrompt:menu] isEqualToString:@"quit"]) {
+            }
+            if ([menuChoice isEqualToString:@"quit"]) {
                 programRun = NO;
+                NSLog(@"Have a nice day!");
             }
         }
     }
